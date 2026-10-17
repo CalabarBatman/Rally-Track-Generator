@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://op6xdt4m03dp"]
+
+[ext_resource type="Script" uid="uid://bld87qd7yjfuq" path="res://scenes/RallyStage.tscn.gd" id="1_uwrxv"]
+
+[node name="RallyStage" type="Node2D" unique_id=962991751]
+script = ExtResource("1_uwrxv")
