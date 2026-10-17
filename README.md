@@ -19,7 +19,7 @@ other track features.
 - Track self-intersection prevention
 
 ## Demo
-
+<img width="2880" height="1698" alt="image" src="https://github.com/user-attachments/assets/2d31b947-0a6e-4084-9229-7fd6934de540" />
 
 ## Technologies
 
