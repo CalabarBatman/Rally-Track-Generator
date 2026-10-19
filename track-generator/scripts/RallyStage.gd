@@ -5,7 +5,7 @@ extends Node2D
 @export var point_spacing: float = 8.0
 @export var road_width: float = 24.0
 
-# Number of features to generate
+#number of features to generate
 @export var kink_count: int = 4
 @export var r1_count: int = 1
 @export var r2_count: int = 2
@@ -20,7 +20,6 @@ var track_points: PackedVector2Array = []
 
 func _ready():
 	generate_stage()
-
 
 func _unhandled_input(event):
 	# Press R to generate another stage
@@ -38,7 +37,7 @@ func generate_stage():
 
 	var events: Array[Dictionary] = []
 
-	# Add the requested turn types
+	#add the requested turn types
 	add_turn_events(events, 1, r1_count, 4, 60, 110)
 	add_turn_events(events, 2, r2_count, 6, 50, 90)
 	add_turn_events(events, 3, r3_count, 8, 40, 75)
@@ -46,12 +45,12 @@ func generate_stage():
 	add_turn_events(events, 5, r5_count, 12, 25, 50)
 	add_turn_events(events, 6, r6_count, 14, 20, 40)
 
-	# Add hairpins
+	#add hairpins (180 degree turns)
 	add_turn_events(
 		events, 0, hairpin_count, 8, 150, 180
 	)
 
-	# Add kinks as quick left-right or right-left changes
+	#add kinks as quick left-right or right-left changes
 	for i in range(kink_count):
 		var direction = 1.0
 		if randf() < 0.5:
@@ -71,24 +70,24 @@ func generate_stage():
 			"angle": -direction * 18.0
 		})
 
-	# Randomize the order of the features
+	# randomize the order of the features
 	events.shuffle()
 
-	# Spread events along the stage
+	#spread events along the stage
 	for i in range(events.size()):
 		events[i]["start"] = int(
 			float(i + 1) * step_count
 			/ float(events.size() + 1)
 		)
 
-	# Generate the actual path
+	#make the actual path
 	var position = Vector2.ZERO
 	var heading = 0.0
 
 	track_points.append(position)
 
 	for step in range(step_count):
-		# Apply the direction changes active at this step
+		# apply the direction changes active at this step
 		for turn in events:
 			var start = int(turn["start"])
 			var duration = int(turn["duration"])
@@ -98,7 +97,7 @@ func generate_stage():
 					float(turn["angle"]) / float(duration)
 				)
 
-		# Move forward along the current heading
+		# move forward along the current heading/
 		var movement = Vector2.RIGHT.rotated(heading)
 		position += movement * point_spacing
 
@@ -130,7 +129,6 @@ func add_turn_events(
 			"duration": duration,
 			"angle": angle
 		})
-
 
 func _draw():
 	if track_points.size() < 2:
@@ -188,5 +186,4 @@ func _draw():
 		Vector2(20, 30),
 		"Rally Stage Generator | Press R to regenerate",
 		HORIZONTAL_ALIGNMENT_LEFT,
-		-1, 18, Color.WHITE
-	)
+		-1, 18, Color.WHITE)
