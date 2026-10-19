@@ -28,14 +28,6 @@ other track features.
 - Procedural Content Generation
 - Computational Geometry
 
-## How to Run
-
-1. Install Godot 4.
-2. Clone this repository.
-3. Open the project in Godot.
-4. Run the main scene.
-5. Press R to generate another stage.
-
 ## What I Learned
 
 - Procedural geometry generation
